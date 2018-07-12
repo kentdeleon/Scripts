@@ -12,27 +12,27 @@ EXIT /B %ERRORLEVEL%
 
 :displayFunc
 echo ========================================
-echo "eagleId" 	: "%eagleId%"
-echo "citbox" 	: "%citbox%"
+echo "userId" 	: "%userId%"
+echo "server" 	: "%server%"
 echo "puttyDir" 	: "%puttyDir%"
 echo ========================================
 EXIT /B 0
 
 :readFileContent
 	FOR /f "delims=, tokens=1,2,3" %%a in (parameters.txt) do (
-		SET eagleId=%%a
-		SET citbox=%%b
+		SET userId=%%a
+		SET server=%%b
 		SET puttyDir=%%c
 	)
 EXIT /B 0
 
 :askUserForInputParameters
 	IF %eagleId%==NULL (
-		SET /p eagleId="Enter eagleId: "
+		SET /p userId="Enter userId: "
 		CALL :saveUserInputToFile
 	)
 	IF %citbox%==NULL (
-		SET /p citbox="Enter citbox: "
+		SET /p server="Enter server: "
 		CALL :saveUserInputToFile
 	)
 	IF %puttyDir%==NULL (
@@ -42,6 +42,6 @@ EXIT /B 0
 EXIT /B 0
 
 :saveUserInputToFile
-	@echo %eagleId%,%citbox%,%puttyDir%> parameters.txt
+	@echo %userId%,%server%,%puttyDir%> parameters.txt
 	echo Successfully save new parameters to parameters.txt
 EXIT /B 0
